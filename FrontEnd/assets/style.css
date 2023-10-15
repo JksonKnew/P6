@@ -130,16 +130,20 @@ table {
 
 /** end reset css**/
 body {
-  max-width: 1140px;
-  margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
   background-color: #FFFEF8;
 }
+main {
+	max-width: 1140px;
+    margin: auto;
+}
 header {
-  display: flex;
-  justify-content: space-between;
-  margin: 50px 0;
+    display: flex;
+    max-width: 1140px;
+    margin: auto;
+    padding: 30px;
+    justify-content: space-between;
 }
 section {
   margin: 50px 0;
@@ -165,6 +169,15 @@ h2 {
   font-weight: 700;
   font-size: 30px;
   color: #1d6154;
+}
+.editor-div {
+	display: none;
+	gap: 10px;
+	background-color: black;
+	height: 50px;
+	color: white;
+	justify-content: center;
+	align-items: center;
 }
 nav ul {
   display: flex;
