@@ -176,13 +176,18 @@ h2 {
   color: #1d6154;
 }
 .editor-div {
-	display: none;
+	display: flex;
 	gap: 10px;
 	background-color: black;
 	height: 50px;
+  width: 100%;
 	color: white;
 	justify-content: center;
 	align-items: center;
+}
+nav {
+  display: flex;
+  gap: 20px;
 }
 nav ul {
   display: flex;
@@ -231,7 +236,23 @@ li:hover, a:hover {
 }
 #portfolio h2 {
   text-align: center;
+
+}
+.portfolio-title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
   margin-bottom: 40px;
+}
+.modify-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 .filter-div {
 	display: flex;
@@ -253,6 +274,7 @@ li:hover, a:hover {
 .filter-btn:hover {
 	background-color: #1d6154;
 	color: white;
+  cursor: pointer;
 }
 .filter-btn-active {
   background-color: #1d6154;

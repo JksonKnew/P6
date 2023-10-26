@@ -4,9 +4,8 @@ function getWorks() {
     fetch('http://localhost:5678/api/works', {method: "GET", headers: {"Content-Type": "application/json"}})
     .then(response => response.json())
     .then(json => {
-        worksItems = json; 
+        worksItems = json;
         generateWorks(worksItems);
-        filter(worksItems);
     })
     .catch(error => console.error(error))
 }
@@ -31,7 +30,12 @@ function generateWorks(works) {
     }
 }
 
-function btnColor(_n) {
+function filterWorks(filterId) {
+    const filteredWorks = worksItems.filter(work => work.categoryId === filterId);
+    generateWorks(filteredWorks);
+}
+
+function setBtnActive(_n) {
     let btnAll = document.getElementById("btnAll");
     let btnObjects = document.getElementById("btnObjects");
     let btnAppartment = document.getElementById("btnAppartment");
@@ -41,48 +45,89 @@ function btnColor(_n) {
     btnObjects.classList.remove("filter-btn-active");
     btnAppartment.classList.remove("filter-btn-active");
     btnHotel.classList.remove("filter-btn-active");
-    
+
     _n.classList.add("filter-btn-active");
 
 }
 
 
-// function btnColor(_n) {
-//     let btn = document.querySelector(".filter-btn")
-//     btn.classList.remove("filter-btn-active");
-//     _n.classList.add("filter-btn-active");
-// }
-
-function filterWorks(filterId) {
-    const filteredWorks = worksItems.filter(work => work.categoryId === filterId);
-    generateWorks(filteredWorks);
+function btnColor(_n) {
+    let btn = document.querySelector(".filter-btn")
+    btn.classList.remove("filter-btn-active");
+    _n.classList.add("filter-btn-active");
 }
 
-function filter(works) {
-    let btnAll = document.getElementById("btnAll");
-    let btnObjects = document.getElementById("btnObjects");
-    let btnAppartment = document.getElementById("btnAppartment");
-    let btnHotel = document.getElementById("btnHotel");
 
-    btnAll.addEventListener("click", function () {
-        generateWorks(works); 
-        btnColor(btnAll);
-    });
-
-    btnObjects.addEventListener("click", function () {
-        filterWorks(1); 
-        btnColor(btnObjects);
-    });
-
-    btnAppartment.addEventListener("click", function () {
-        filterWorks(2);
-        btnColor(btnAppartment);
-    });
-
-    btnHotel.addEventListener("click", function () {
-        filterWorks(3);
-        btnColor(btnHotel);
-    });
-}
 
 getWorks();
+
+
+// ****************************  Loggin  **************************/
+function createElementsAdmin() {
+
+    //**********************Editor mode header************
+    let body = document.getElementById("bodyContainer");
+    let editorBanner = document.createElement("div");
+    editorBanner.classList.add("editor-div");
+    let editorBannerImg = document.createElement("i");
+    editorBannerImg.classList.add("fa-regular", "fa-pen-to-square");
+    let editorBannerTxt = document.createElement("p");
+    editorBannerTxt.innerHTML = "Mode Édition";
+
+    body.prepend(editorBanner);
+    editorBanner.appendChild(editorBannerImg);
+    editorBanner.appendChild(editorBannerTxt);
+
+    //************************ Login/logout **********************
+
+    document.getElementById("login-btn").style.display = "none";
+    let navContainer = document.getElementById("nav-list");
+    let logoutBtn = document.createElement("li");
+    let logoutTxt = document.createElement("a");
+    logoutTxt.innerHTML="Logout";
+    
+    navContainer.appendChild(logoutBtn);
+    logoutBtn.appendChild(logoutTxt)
+
+
+    //************************ filter **********************
+
+    let filterContainer = document.querySelector(".portfolio-title-container");
+    let btnDivModify = document.createElement("div");
+    btnDivModify.classList.add("modify-btn");
+    let modifyBtnImg = document.createElement("i");
+    modifyBtnImg.classList.add("fa-regular", "fa-pen-to-square");
+    let modifyBtnTxt = document.createElement("p");
+    modifyBtnTxt.innerHTML="Éditer";
+
+
+    filterContainer.appendChild(btnDivModify);
+    btnDivModify.appendChild(modifyBtnImg);
+    btnDivModify.appendChild(modifyBtnTxt);
+
+
+    document.querySelector(".filter-div").style.display = "none";
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    createElementsAdmin();
+});
+
+// binding
+// sessionStorage
+sessionStorage
+//hidden
