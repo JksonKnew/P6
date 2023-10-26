@@ -4,7 +4,7 @@ function getWorks() {
     fetch('http://localhost:5678/api/works', {method: "GET", headers: {"Content-Type": "application/json"}})
     .then(response => response.json())
     .then(json => {
-        worksItems = json; // Assign the JSON data to the global worksItems variable
+        worksItems = json; 
         generateWorks(worksItems);
         filter(worksItems);
     })
@@ -14,7 +14,6 @@ function getWorks() {
 function generateWorks(works) {
     const sectionGallery = document.querySelector(".gallery");
 
-    // Clear the existing content
     sectionGallery.innerHTML = '';
 
     for (let i = 0; i < works.length; i++) {
@@ -32,8 +31,30 @@ function generateWorks(works) {
     }
 }
 
-function filterWorks(categoryId) {
-    const filteredWorks = worksItems.filter(work => work.categoryId === categoryId);
+function btnColor(_n) {
+    let btnAll = document.getElementById("btnAll");
+    let btnObjects = document.getElementById("btnObjects");
+    let btnAppartment = document.getElementById("btnAppartment");
+    let btnHotel = document.getElementById("btnHotel");
+
+    btnAll.classList.remove("filter-btn-active");
+    btnObjects.classList.remove("filter-btn-active");
+    btnAppartment.classList.remove("filter-btn-active");
+    btnHotel.classList.remove("filter-btn-active");
+    
+    _n.classList.add("filter-btn-active");
+
+}
+
+
+// function btnColor(_n) {
+//     let btn = document.querySelector(".filter-btn")
+//     btn.classList.remove("filter-btn-active");
+//     _n.classList.add("filter-btn-active");
+// }
+
+function filterWorks(filterId) {
+    const filteredWorks = worksItems.filter(work => work.categoryId === filterId);
     generateWorks(filteredWorks);
 }
 
@@ -44,19 +65,23 @@ function filter(works) {
     let btnHotel = document.getElementById("btnHotel");
 
     btnAll.addEventListener("click", function () {
-        generateWorks(works); // Display all works
+        generateWorks(works); 
+        btnColor(btnAll);
     });
 
     btnObjects.addEventListener("click", function () {
-        filterWorks(1); // Display works with categoryId 1 (Objects)
+        filterWorks(1); 
+        btnColor(btnObjects);
     });
 
     btnAppartment.addEventListener("click", function () {
-        filterWorks(2); // Display works with categoryId 2 (Appartements)
+        filterWorks(2);
+        btnColor(btnAppartment);
     });
 
     btnHotel.addEventListener("click", function () {
-        filterWorks(3); // Display works with categoryId 3 (Hotels & restaurants)
+        filterWorks(3);
+        btnColor(btnHotel);
     });
 }
 
