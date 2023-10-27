@@ -100,6 +100,7 @@ function createElementsAdmin() {
     let filterContainer = document.querySelector(".portfolio-title-container");
     let btnDivModify = document.createElement("div");
     btnDivModify.classList.add("modify-btn");
+    btnDivModify.setAttribute("id", "modifyBtn")
     let modifyBtnImg = document.createElement("i");
     modifyBtnImg.classList.add("fa-regular", "fa-pen-to-square");
     let modifyBtnTxt = document.createElement("p");
@@ -120,6 +121,20 @@ function createElementsAdmin() {
 function verifyLog() {
     if (window.localStorage.getItem("token") != null){
         createElementsAdmin();
+
+        
+        let modifyBtn = document.getElementById("modifyBtn");
+        let closeModaleBtn = document.getElementById("closeModaleBtn")
+        modifyBtn.addEventListener("click", function(){
+            openModale();
+        })
+        closeModaleBtn.addEventListener("click", function(){
+            closeModale();
+        })
+
+    } else {
+        let modaleSection = document.getElementById("modaleFullContainer")
+        modaleSection.remove();
     }
 }
 
@@ -130,6 +145,53 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+//***************************************** Modale ***************************************
+
+function openModale() {
+    let modaleActive = document.querySelector(".modale-full-container");
+    modaleActive.style.display="flex";
+    fetchModale();
+}
+
+function closeModale() {
+    let modaleActive = document.querySelector(".modale-full-container");
+    let modaleContent = document.getElementById("galleryEditContainer")
+
+    modaleActive.style.display="none";
+    modaleContent.innerHTML='';
+}
+
+function fetchModale() {
+    fetch('http://localhost:5678/api/works', {method: "GET", headers: {"Content-Type": "application/json"}})
+    .then(response => response.json())
+    .then(json => {
+        worksItems = json;
+        generateModaleImg(worksItems)
+    })
+    .catch(error => console.error(error))
+}
+
+function generateModaleImg(works) {
+    let container = document.getElementById("galleryEditContainer");
+
+    for (i=0; i < works.length; i++) {
+        const work = works[i]
+        console.log(work);
+
+        figure = document.createElement("figure");
+        div = document.createElement("div");
+        div.classList.add("trash-container");
+        trash = document.createElement("i");
+        trash.classList.add("fa-solid", "fa-trash-can", "fa-sm");
+        image = document.createElement("img");
+        image.src = work.imageUrl;
 
 
 
+        container.appendChild(figure);
+        figure.appendChild(div);
+        div.appendChild(trash);
+        figure.appendChild(image);
+
+    }
+}
