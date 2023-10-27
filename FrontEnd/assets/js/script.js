@@ -85,6 +85,11 @@ function createElementsAdmin() {
     let logoutBtn = document.createElement("li");
     let logoutTxt = document.createElement("a");
     logoutTxt.innerHTML="Logout";
+    logoutBtn.addEventListener("click", function(){
+        window.localStorage.removeItem("token")
+        verifyLog();
+        location.reload();
+    })
     
     navContainer.appendChild(logoutBtn);
     logoutBtn.appendChild(logoutTxt)
@@ -110,24 +115,21 @@ function createElementsAdmin() {
 
 }
 
+//************************ Login **********************
 
-
-
-
-
-
-
-
-
-
-
-
+function verifyLog() {
+    if (window.localStorage.getItem("token") != null){
+        createElementsAdmin();
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function() {
-    createElementsAdmin();
+    verifyLog();
 });
 
-// binding
-// sessionStorage
-sessionStorage
-//hidden
+
+
+
+
+
+
