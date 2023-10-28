@@ -395,6 +395,8 @@ footer nav ul {
   text-align: center;
 }
 
+/***************** Modale **********************/
+
 .modale-full-container {
   position: fixed;
   margin: 0px;
@@ -409,19 +411,27 @@ footer nav ul {
 .modale-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-  height: 688px;
   width: 630px;
   background-color: white;
   border-radius: 20px;
 }
 
+.nav-modale-btn {
+  display: flex;
+  height: 20px;
+  margin-top: 30px;
+  width: 572px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .close-modale-btn{
-  position: relative;
   cursor: pointer;
-  left: 280px;
-  top: 15px;
+}
+
+.left-modale-btn{
+  cursor: pointer;
 }
 
 .modale-title {
@@ -430,6 +440,8 @@ footer nav ul {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 .btn-add-photo {
@@ -440,17 +452,17 @@ footer nav ul {
   font-weight: 700;
   color: white;
   background-color: #1d6154;
-  margin-bottom: 20px;
+  margin: 30px;
   width: 180px;
   height: 45px;
   text-align: center;
   border-radius: 60px;
+  cursor: pointer;
 }
 
 .gallery-editor-container {
-  height: 446px;
+  height: 470px;
   width: 516px;
-  /* background-color: red; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -482,4 +494,31 @@ footer nav ul {
   object-fit: cover;
   height: 100%;
   width: 100%;
+}
+
+
+
+/***************** Modale Page 2 *********************/
+
+
+.form-modale-container {
+  height: 600px;
+  width: 520px;
+  background-color: blue;
+}
+
+.btn-validation {
+  display: flex;
+  justify-content: center;
+  font-family: "Syne";
+  align-items: center;
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 30px;
+  width: 180px;
+  height: 45px;
+  text-align: center;
+  border-radius: 60px;
+  cursor: pointer;
 }

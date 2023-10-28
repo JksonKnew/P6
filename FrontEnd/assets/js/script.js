@@ -95,12 +95,13 @@ function createElementsAdmin() {
     logoutBtn.appendChild(logoutTxt)
 
 
-    //************************ filter **********************
+    //************************ filter & Modify button **********************
 
     let filterContainer = document.querySelector(".portfolio-title-container");
     let btnDivModify = document.createElement("div");
     btnDivModify.classList.add("modify-btn");
-    btnDivModify.setAttribute("id", "modifyBtn")
+    btnDivModify.setAttribute("id", "modifyBtn");
+    btnDivModify.setAttribute("onclick", "modaleFirstPage()");
     let modifyBtnImg = document.createElement("i");
     modifyBtnImg.classList.add("fa-regular", "fa-pen-to-square");
     let modifyBtnTxt = document.createElement("p");
@@ -128,9 +129,6 @@ function verifyLog() {
         modifyBtn.addEventListener("click", function(){
             openModale();
         })
-        closeModaleBtn.addEventListener("click", function(){
-            closeModale();
-        })
 
     } else {
         let modaleSection = document.getElementById("modaleFullContainer")
@@ -150,18 +148,18 @@ document.addEventListener("DOMContentLoaded", function() {
 function openModale() {
     let modaleActive = document.querySelector(".modale-full-container");
     modaleActive.style.display="flex";
-    fetchModale();
 }
 
 function closeModale() {
-    let modaleActive = document.querySelector(".modale-full-container");
-    let modaleContent = document.getElementById("galleryEditContainer")
+    let modaleSection = document.querySelector(".modale-full-container");
+    let modaleContent = document.querySelector(".modale-container");
 
-    modaleActive.style.display="none";
-    modaleContent.innerHTML='';
+
+    modaleSection.style.display="none";
+    modaleContent.remove();
 }
 
-function fetchModale() {
+function modaleFirstPage() {
     fetch('http://localhost:5678/api/works', {method: "GET", headers: {"Content-Type": "application/json"}})
     .then(response => response.json())
     .then(json => {
@@ -171,8 +169,53 @@ function fetchModale() {
     .catch(error => console.error(error))
 }
 
+function switchSecondToFirst() {
+    closeModale();
+    modaleFirstPage();
+}
+
 function generateModaleImg(works) {
-    let container = document.getElementById("galleryEditContainer");
+
+    openModale();
+
+    // Modale container
+    let modaleSection = document.getElementById("modaleFullContainer");
+    let mainContainer = document.createElement("div");
+    mainContainer.classList.add("modale-container");
+    modaleSection.appendChild(mainContainer);
+
+
+    // Nav bouton
+    let nav = document.createElement("div");
+    nav.classList.add("nav-modale-btn");
+    mainContainer.appendChild(nav);
+
+    let crossBtn = document.createElement("i");
+    crossBtn.classList.add("fa-solid", "fa-xmark", "fa-xl", "close-modale-btn");
+    crossBtn.setAttribute("onclick", "closeModale()");
+    nav.appendChild(crossBtn);
+
+
+    // Title 
+    let modaleTitle = document.createElement("span");
+    modaleTitle.classList.add("modale-title");
+    modaleTitle.innerHTML="Galerie Photo";
+    mainContainer.appendChild(modaleTitle);
+
+
+    // Gallery Container
+    let container = document.createElement("div");
+    container.classList.add("gallery-editor-container");
+    container.setAttribute("id", "galleryEditContainer");
+    mainContainer.appendChild(container);
+
+
+    // Btn
+    let addPhotoBtn = document.createElement("span");
+    addPhotoBtn.classList.add("btn-add-photo");
+    addPhotoBtn.setAttribute("onclick", "modaleSecondPage()");
+    addPhotoBtn.innerHTML="Ajouter une photo";
+    mainContainer.appendChild(addPhotoBtn);
 
     for (i=0; i < works.length; i++) {
         const work = works[i]
@@ -194,4 +237,60 @@ function generateModaleImg(works) {
         figure.appendChild(image);
 
     }
+    
 }
+
+function modaleSecondPage() {
+
+    closeModale();
+    openModale();
+
+    // Modale container
+    let modaleSection = document.getElementById("modaleFullContainer");
+    let mainContainer = document.createElement("div");
+    mainContainer.classList.add("modale-container");
+    modaleSection.appendChild(mainContainer);
+
+
+    // Nav bouton
+    let nav = document.createElement("div");
+    nav.classList.add("nav-modale-btn");
+    mainContainer.appendChild(nav);
+
+    let crossBtn = document.createElement("i");
+    crossBtn.classList.add("fa-solid", "fa-xmark", "fa-xl", "close-modale-btn");
+    crossBtn.setAttribute("onclick", "closeModale()");
+    nav.appendChild(crossBtn);
+
+    let leftBtn = document.createElement("i");
+    leftBtn.classList.add("fa-solid", "fa-arrow-left", "fa-xl", "left-modale-btn");
+    leftBtn.setAttribute("onclick", "closeModale()");
+    leftBtn.setAttribute("onclick", "switchSecondToFirst()")
+    nav.prepend(leftBtn);
+    nav.style="justify-content: space-between";
+
+    // Title 
+    let modaleTitle = document.createElement("span");
+    modaleTitle.classList.add("modale-title");
+    modaleTitle.innerHTML="Galerie Photo";
+    mainContainer.appendChild(modaleTitle);
+
+
+    // Form Container
+    let container = document.createElement("div");
+    container.classList.add("form-modale-container");
+    mainContainer.appendChild(container);
+
+
+    // Btn
+    let addPhotoBtn = document.createElement("span");
+    addPhotoBtn.classList.add("btn-validation");
+    addPhotoBtn.innerHTML="Valider";
+    mainContainer.appendChild(addPhotoBtn);
+
+}
+
+
+
+
+
