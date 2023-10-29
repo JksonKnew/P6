@@ -503,8 +503,7 @@ footer nav ul {
 
 .form-modale-container {
   height: 600px;
-  width: 520px;
-  background-color: blue;
+  width: 420px;
 }
 
 .btn-validation {
@@ -522,3 +521,82 @@ footer nav ul {
   border-radius: 60px;
   cursor: pointer;
 }
+
+.submit-image-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.label-file{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  height: 300px;
+  width: 100%;
+  background-color: #E8F1F6;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.add-img-from-btn {
+  background-color: #CBD6DC;
+  padding: 1em 2em;
+  border-radius: 40px;
+  color: #306685;
+  text-align: center;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.add-img-from-btn:hover {
+  cursor: pointer;
+  background-color: #90a9b7;
+  color: #c9deea;
+}
+
+.label-file i {
+  margin: 20px;
+  font-size: 100px;
+  color: rgba(185, 197, 204, 1);
+}
+
+.input-title {
+  color: #3D3D3D;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.img-file-input {
+  display: none;
+}
+
+.category-select {
+  width: 420px;
+  flex-shrink: 0;
+  height: 52px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.submit-image-form input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.submit-image-form textarea {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+

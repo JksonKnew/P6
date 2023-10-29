@@ -164,7 +164,7 @@ function modaleFirstPage() {
     .then(response => response.json())
     .then(json => {
         worksItems = json;
-        generateModaleImg(worksItems)
+        firstModaleGeneration(worksItems)
     })
     .catch(error => console.error(error))
 }
@@ -174,7 +174,7 @@ function switchSecondToFirst() {
     modaleFirstPage();
 }
 
-function generateModaleImg(works) {
+function firstModaleGeneration(works) {
 
     openModale();
 
@@ -219,7 +219,6 @@ function generateModaleImg(works) {
 
     for (i=0; i < works.length; i++) {
         const work = works[i]
-        console.log(work);
 
         figure = document.createElement("figure");
         div = document.createElement("div");
@@ -281,8 +280,64 @@ function modaleSecondPage() {
     container.classList.add("form-modale-container");
     mainContainer.appendChild(container);
 
+    // Form
+    let submitImageForm = document.createElement("form");
+    submitImageForm.classList.add("submit-image-form");
+    container.appendChild(submitImageForm);
 
-    // Btn
+    let imgFileLabel = document.createElement("label");
+    imgFileLabel.classList.add("label-file");
+    imgFileLabel.setAttribute("for", "imgFile");
+    submitImageForm.appendChild(imgFileLabel);
+    let imgFileLabelFa = document.createElement("i");
+    imgFileLabelFa.classList.add("far", "fa-image", "fa-2x");
+    imgFileLabel.appendChild(imgFileLabelFa);
+    let imgFileLabelBtn = document.createElement("span");
+    imgFileLabelBtn.classList.add("add-img-from-btn");
+    imgFileLabelBtn.innerHTML="+ Ajouter une photo";
+    imgFileLabel.appendChild(imgFileLabelBtn);
+    let inputImg = document.createElement("input");
+    inputImg.classList.add("img-file-input");
+    inputImg.setAttribute("type", "file");
+    inputImg.setAttribute("id", "imgFile");
+    inputImg.setAttribute("accept", "image/png, image/jpeg");
+    submitImageForm.appendChild(inputImg);
+
+    let titleLabel = document.createElement("label");
+    titleLabel.classList.add("input-title");
+    titleLabel.setAttribute("for", "title");
+    titleLabel.innerHTML="Titre";
+    submitImageForm.appendChild(titleLabel);
+    let titleInput = document.createElement("input");
+    titleInput.setAttribute("type", "text");
+    titleInput.setAttribute("id", "title");
+    submitImageForm.appendChild(titleInput);
+
+    let categoryTitle = document.createElement("label");
+    categoryTitle.classList.add("input-title");
+    categoryTitle.setAttribute("for", "category");
+    categoryTitle.innerHTML="Catégorie";
+    submitImageForm.appendChild(categoryTitle);
+    let categoryInput = document.createElement("select");
+    categoryInput.classList.add("category-select");
+    categoryInput.setAttribute("id", "category");
+    submitImageForm.appendChild(categoryInput);
+    let optionNull = document.createElement("option");
+    categoryInput.appendChild(optionNull);
+    let optionObject = document.createElement("option");
+    optionObject.setAttribute("value", "1");
+    optionObject.innerHTML="Objets";
+    categoryInput.appendChild(optionObject);
+    let optionAppartements = document.createElement("option");
+    optionAppartements.setAttribute("value", "2");
+    optionAppartements.innerHTML="Appartements";
+    categoryInput.appendChild(optionAppartements);
+    let optionHotel = document.createElement("option");
+    optionHotel.setAttribute("value", "3");
+    optionHotel.innerHTML="Hôtels et Restaurants";
+    categoryInput.appendChild(optionHotel);
+
+    // Btn validation
     let addPhotoBtn = document.createElement("span");
     addPhotoBtn.classList.add("btn-validation");
     addPhotoBtn.innerHTML="Valider";
