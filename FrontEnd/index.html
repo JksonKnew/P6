@@ -99,6 +99,51 @@
       </section>
     </main>
     <section id="modaleFullContainer" class="modale-full-container">
+      <div class="modale-container">
+        <div class="nav-modale-btn">
+          <i
+            class="fa-solid fa-arrow-left fa-xl return-modale-btn"
+            onclick="returnModale()"
+            id="returnModaleBtn"
+          ></i>
+          <i
+            class="fa-solid fa-xmark fa-xl close-modale-btn"
+            onclick="closeModale()"
+          ></i>
+        </div>
+        <span class="modale-title">Galerie Photo</span>
+        <div
+          class="gallery-editor-container"
+          id="galleryEditContainer"
+          type="hidden"
+        >
+        </div>
+        <span class="btn-add-photo" onclick="modaleSecondPage()"
+          >Ajouter une photo</span
+        >
+        <form class="submit-image-form">
+          <label class="label-file" for="imgFile"
+            ><i class="far fa-image fa-2x" aria-hidden="true"></i
+            ><span class="add-img-from-btn">+ Ajouter une photo</span></label
+          ><input
+            class="img-file-input"
+            type="file"
+            id="imgFile"
+            accept="image/png, image/jpeg"
+          /><label class="input-title" for="title">Titre</label
+          ><input type="text" id="title" /><label
+            class="input-title"
+            for="category"
+            >Catégorie</label
+          ><select class="category-select" id="category">
+            <option></option>
+            <option value="1">Objets</option>
+            <option value="2">Appartements</option>
+            <option value="3">Hôtels et Restaurants</option>
+          </select>
+        </form>
+        <span class="btn-validation">Valider</span>
+      </div>
     </section>
     <footer>
       <nav>
