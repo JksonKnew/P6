@@ -427,11 +427,11 @@ footer nav ul {
   align-items: center;
 }
 
-.close-modale-btn{
+.close-modale-btn {
   cursor: pointer;
 }
 
-.left-modale-btn{
+.left-modale-btn {
   cursor: pointer;
 }
 
@@ -497,10 +497,7 @@ footer nav ul {
   width: 100%;
 }
 
-
-
 /***************** Modale Page 2 *********************/
-
 
 .form-modale-container {
   height: 600px;
@@ -534,7 +531,7 @@ footer nav ul {
   gap: 15px;
 }
 
-.label-file{
+.label-file {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -542,13 +539,13 @@ footer nav ul {
   margin: 0px;
   height: 300px;
   width: 100%;
-  background-color: #E8F1F6;
+  background-color: #e8f1f6;
   border-radius: 20px;
   margin-bottom: 30px;
 }
 
 .add-img-from-btn {
-  background-color: #CBD6DC;
+  background-color: #cbd6dc;
   padding: 1em 2em;
   border-radius: 40px;
   color: #306685;
@@ -573,7 +570,7 @@ footer nav ul {
 }
 
 .input-title {
-  color: #3D3D3D;
+  color: #3d3d3d;
   font-family: Work Sans;
   font-size: 14px;
   font-style: normal;
@@ -606,3 +603,66 @@ footer nav ul {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+.delete-validation-container {
+  position: absolute;
+  background-color: white;
+  height: 200px;
+  width: 500px;
+  border-radius: 20px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-validation-title {
+  font-family: Work Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.delete-validation-choice {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-annulation-btn {
+  display: flex;
+  justify-content: center;
+  font-family: "Syne";
+  align-items: center;
+  font-weight: 700;
+  color: #1d6154;
+  background-color: white;
+  border-color: #1d6154;
+  border: solid;
+  width: 160px;
+  height: 38px;
+  text-align: center;
+  border-radius: 60px;
+  cursor: pointer;
+}
+
+.delete-validation-btn {
+  display: flex;
+  justify-content: center;
+  font-family: "Syne";
+  align-items: center;
+  font-weight: 700;
+  color: white;
+  background-color: #ba1e1e;
+  width: 160px;
+  height: 38px;
+  text-align: center;
+  border-radius: 60px;
+  border: solid;
+  border-color: #ba1e1e;
+  cursor: pointer;
+}

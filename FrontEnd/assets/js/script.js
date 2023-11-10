@@ -12,6 +12,7 @@ function getWorks() {
 }
 
 function generateWorks(works) {
+    
     const sectionGallery = document.querySelector(".gallery");
 
     sectionGallery.innerHTML = '';
@@ -102,7 +103,7 @@ function createElementsAdmin() {
     let btnDivModify = document.createElement("div");
     btnDivModify.classList.add("modify-btn");
     btnDivModify.setAttribute("id", "modifyBtn");
-    btnDivModify.setAttribute("onclick", "modaleFirstPage()");
+    btnDivModify.setAttribute("onclick", "openModale()");
     let modifyBtnImg = document.createElement("i");
     modifyBtnImg.classList.add("fa-regular", "fa-pen-to-square");
     let modifyBtnTxt = document.createElement("p");
@@ -119,36 +120,80 @@ function createElementsAdmin() {
 }
     //************************ Gallery Admin **********************
 function createAdminGallery(works) {
-container = document.getElementById("galleryEditContainer");
 
-for (i=0; i < works.length; i++) {
-    const work = works[i]
-
-    figure = document.createElement("figure");
-    div = document.createElement("div");
-    div.classList.add("trash-container");
-    div.setAttribute("onclick", `deleteFig(${work.id})`)
-    trash = document.createElement("i");
-    trash.classList.add("fa-solid", "fa-trash-can", "fa-sm");
-    image = document.createElement("img");
-    image.src = work.imageUrl;
+    container = document.getElementById("galleryEditContainer");
 
 
+    for (i=0; i < works.length; i++) {
+        const work = works[i]
+
+        figure = document.createElement("figure");
+        div = document.createElement("div");
+        div.classList.add("trash-container");
+        div.setAttribute("onclick", `deleteFig(${work.id})`)
+        trash = document.createElement("i");
+        trash.classList.add("fa-solid", "fa-trash-can", "fa-sm");
+        image = document.createElement("img");
+        image.src = work.imageUrl;
 
 
 
-    container.appendChild(figure);
-    figure.appendChild(div);
-    div.appendChild(trash);
-    figure.appendChild(image);
 
-}
+
+        container.appendChild(figure);
+        figure.appendChild(div);
+        div.appendChild(trash);
+        figure.appendChild(image);
+
+    }
 }
 
 function deleteFig(i) {
-    console.log(i);
-    fetch(`http://localhost:5678/api/works/${i}`, {method: "DELETE", headers: {Authorization: `Bearer ${window.localStorage.getItem("token")}`}});
 
+    let index = i;
+
+    let modale = document.querySelector(".delete-validation-container");
+    modale.style.display = "flex";
+
+    document.querySelector(".delete-annulation-btn").addEventListener("click",function(){
+        modale.style.display = "none";
+        index = '';
+    })
+
+    document.querySelector(".delete-validation-btn").addEventListener("click", function(){
+        console.log(index);
+        window.location.reload();
+        fetch(`http://localhost:5678/api/works/${i}`, {
+            method: "DELETE", 
+            headers: {Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        }});
+    })
+}
+
+function addFig(){
+    const formData = new FormData();
+
+    const imgFileInput = document.getElementById('imgFile');
+
+
+    const titleInput = document.getElementById('title');
+    const categorySelect = document.getElementById('category');
+  
+
+    formData.append('image', imgFileInput.files[0]);
+    formData.append('title', titleInput.value);
+    formData.append('category', categorySelect.value);
+
+    console.log(imgFileInput.files[0]);
+    console.log(titleInput.value);
+    console.log(categorySelect.value);
+    console.log(formData);
+
+    fetch(`http://localhost:5678/api/works/`, {
+        method: "POST", 
+        headers: {Authorization: `Bearer ${window.localStorage.getItem("token")}`},
+        body: formData,
+    });
 }
 
 
@@ -161,9 +206,8 @@ function verifyLog() {
 
         
         let modifyBtn = document.getElementById("modifyBtn");
-        let closeModaleBtn = document.getElementById("closeModaleBtn")
         modifyBtn.addEventListener("click", function(){
-            openModale();
+            openModale(); // Mettre cette fonction en onclick
         })
 
     } else {
@@ -203,6 +247,27 @@ function modaleSecondPage() {
     navigationDiv.style="justify-content: space-between";
     document.querySelector(".modale-title").innerHTML="Ajout Photo";
 
+    let imgFile = document.getElementById("imgFile");
+    imgFile.addEventListener("change", function(){
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
+            let imgFile = document.createElement("img");
+            imgFile.src = URL.createObjectURL(selectedFile);
+            imgFile.style.height = "100%";
+            imgFile.style.objectFit = "cover";
+
+            let imgFileContainer = document.querySelector(".label-file");
+            imgFileContainer.appendChild(imgFile);
+            document.querySelector(".add-img-from-btn").style.display = "none";
+            document.querySelector(".far").style.display = "none";
+
+
+            console.log("Fichier chargé : " + selectedFile.name);
+        }
+        
+    })
+
+
 }
 
 function returnModale() {
@@ -215,5 +280,18 @@ function returnModale() {
     document.querySelector(".modale-title").innerHTML="Galerie Photo";
 
 }
+
+
+
+
+
+// Setup click outside modale
+// renaming
+// login iferror
+// gestion error
+
+// Probleme dans le premier fetch, il execute la func admingallery alors que le parent n'exsite pas, faut trouver une solution pour extraire le tableau du fetch et exe la func dans le login verify
+// Le fetch delete qui supprime pas les immages du dossier
+// return error pour le Post
 
 

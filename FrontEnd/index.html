@@ -116,8 +116,7 @@
           class="gallery-editor-container"
           id="galleryEditContainer"
           type="hidden"
-        >
-        </div>
+        ></div>
         <span class="btn-add-photo" onclick="modaleSecondPage()"
           >Ajouter une photo</span
         >
@@ -142,7 +141,16 @@
             <option value="3">Hôtels et Restaurants</option>
           </select>
         </form>
-        <span class="btn-validation">Valider</span>
+        <span onclick="addFig()" class="btn-validation">Valider</span>
+      </div>
+      <div class="delete-validation-container">
+        <span class="delete-validation-title"
+          >Voulez vous vraiment supprimer cette image ?</span
+        >
+        <div class="delete-validation-choice">
+          <span class="delete-annulation-btn">Annuler</span>
+          <span class="delete-validation-btn">Supprimer</span>
+        </div>
       </div>
     </section>
     <footer>
