@@ -123,8 +123,9 @@ function createAdminGallery(works) {
 
     container = document.getElementById("galleryEditContainer");
 
-
-    for (i=0; i < works.length; i++) {
+    if (isConnect === true) {    
+        
+        for (i=0; i < works.length; i++) {
         const work = works[i]
 
         figure = document.createElement("figure");
@@ -145,13 +146,12 @@ function createAdminGallery(works) {
         div.appendChild(trash);
         figure.appendChild(image);
 
-    }
+    }}
+
 }
 
 function deleteFig(i) {
-
     let index = i;
-
     let modale = document.querySelector(".delete-validation-container");
     modale.style.display = "flex";
 
@@ -197,22 +197,16 @@ function addFig(){
 }
 
 
-
 //***************************************** Login *****************************************
-
+let isConnect = false
 function verifyLog() {
     if (window.localStorage.getItem("token") != null){
         createElementsAdmin();
-
-        
-        let modifyBtn = document.getElementById("modifyBtn");
-        modifyBtn.addEventListener("click", function(){
-            openModale(); // Mettre cette fonction en onclick
-        })
-
+        isConnect = true
     } else {
         let modaleSection = document.getElementById("modaleFullContainer")
         modaleSection.remove();
+        isConnect = false
     }
 }
 
@@ -223,18 +217,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 //***************************************** Modale ***************************************
+let isOpen = false;
 
 function openModale() {
     let modaleActive = document.querySelector(".modale-full-container");
     modaleActive.style.display="flex";
     document.getElementById("returnModaleBtn").style.display="none";
+    isOpen = true;
+    console.log(isOpen);
 }
 
 function closeModale() {
     returnModale();
     let modaleSection = document.querySelector(".modale-full-container");
     modaleSection.style.display="none";
+    isOpen = false;
+    console.log(isOpen);
 }
+
+// document.addEventListener('click', function(e) {
+//     if (isOpen = true) {
+//         const box = document.querySelector(".modale-container");
+//         if (!box.contains(e.target)) {
+//             closeModale();
+//         }};
+// });
+
+
+
 
 function modaleSecondPage() {
     document.querySelector(".btn-add-photo").style.display="none";
@@ -288,8 +298,6 @@ function returnModale() {
 // Setup click outside modale
 // renaming
 
-// Probleme dans le premier fetch, il execute la func admingallery alors que le parent n'exsite pas, faut trouver une solution pour extraire le tableau du fetch et exe la func dans le login verify
-// Le fetch delete qui supprime pas les immages du dossier
-// return error pour le Post
+
 
 
