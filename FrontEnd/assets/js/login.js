@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.querySelector(".login-container form");
+    const btnConnect = document.getElementById("btn-connection");
+
+
+
 
     loginForm.addEventListener("submit", async function(event) {
         event.preventDefault();
@@ -20,27 +24,40 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         
             const result = await response.json();
-            console.log("Success:", result);
+            const token = result.token;
+            window.localStorage.setItem("token", token);
+
+            if (token == null){
+              console.log("faux");
+              const passwordInput = document.getElementById("motdepasse");
+              const emailInput = document.getElementById("email");
+
+              btnConnect.setAttribute("value", "Mot de passe erroné");
+              btnConnect.style.width= "auto";
+              btnConnect.style.padding= "0px 20px";
+              btnConnect.style.backgroundColor="firebrick";
+              passwordInput.style.border="2px solid red";
+              emailInput.style.border="2px solid red";
+
+
+              passwordInput.addEventListener("focus", function(){
+                btnConnect.setAttribute("value", "Se connecter");
+                btnConnect.style.backgroundColor="#1d6154";
+                passwordInput.style.border="none";
+                emailInput.style.border="none";
+              });
+
+
+            } else {
+              console.log("vrai");
+              document.location.href="index.html";
+            }
+
           } catch (error) {
-            console.error("Error:", error);
+            console.log("Error:", error);
           }
         });
 
+        
 
-
-
-
-
-
-
-        // .then((response) => response.json())
-        // .then((tokenData) => {
-        //      const token = tokenData.token;
-        //      console.log(token);
-        //      window.localStorage.setItem("token", token);
-        //      // document.location.href="index.html";
-        //  })
-        // .catch((error) => {
-        //     console.error("Erreur lors de la demande de token :", error);
-        // });
     });

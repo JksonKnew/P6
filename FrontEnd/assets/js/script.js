@@ -287,8 +287,6 @@ function returnModale() {
 
 // Setup click outside modale
 // renaming
-// login iferror
-// gestion error
 
 // Probleme dans le premier fetch, il execute la func admingallery alors que le parent n'exsite pas, faut trouver une solution pour extraire le tableau du fetch et exe la func dans le login verify
 // Le fetch delete qui supprime pas les immages du dossier
