@@ -33,32 +33,26 @@ function generateWorks(works) {
 }
 
 function filterWorks(filterId) {
+    if (filterId === 0) {
+        generateWorks(worksItems);
+        resetFilter();
+        document.getElementById(`btnFilter0`).classList.add("filter-btn-active");
+        return
+    }
     const filteredWorks = worksItems.filter(work => work.categoryId === filterId);
     generateWorks(filteredWorks);
+
+
+    resetFilter();
+    document.getElementById(`btnFilter${filterId}`).classList.add("filter-btn-active");
 }
 
-function setBtnActive(_n) {
-    let btnAll = document.getElementById("btnAll");
-    let btnObjects = document.getElementById("btnObjects");
-    let btnAppartment = document.getElementById("btnAppartment");
-    let btnHotel = document.getElementById("btnHotel");
-
-    btnAll.classList.remove("filter-btn-active");
-    btnObjects.classList.remove("filter-btn-active");
-    btnAppartment.classList.remove("filter-btn-active");
-    btnHotel.classList.remove("filter-btn-active");
-
-    _n.classList.add("filter-btn-active");
-
+function resetFilter(){
+    document.getElementById("btnFilter0").classList.remove("filter-btn-active");
+    document.getElementById("btnFilter1").classList.remove("filter-btn-active");
+    document.getElementById("btnFilter2").classList.remove("filter-btn-active");
+    document.getElementById("btnFilter3").classList.remove("filter-btn-active");
 }
-
-
-function btnColor(_n) {
-    let btn = document.querySelector(".filter-btn")
-    btn.classList.remove("filter-btn-active");
-    _n.classList.add("filter-btn-active");
-}
-
 
 
 getWorks();
