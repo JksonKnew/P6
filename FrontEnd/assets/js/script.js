@@ -223,8 +223,17 @@ function openModale() {
     let modaleActive = document.querySelector(".modale-full-container");
     modaleActive.style.display="flex";
     document.getElementById("returnModaleBtn").style.display="none";
-    isOpen = true;
-    console.log(isOpen);
+    setTimeout(()=>{
+
+        isOpen=true
+        console.log(isOpen);
+    },50);
+
+
+
+    window.addEventListener('click', listenerClick);
+
+
 }
 
 function closeModale() {
@@ -235,13 +244,15 @@ function closeModale() {
     console.log(isOpen);
 }
 
-// document.addEventListener('click', function(e) {
-//     if (isOpen = true) {
-//         const box = document.querySelector(".modale-container");
-//         if (!box.contains(e.target)) {
-//             closeModale();
-//         }};
-// });
+
+function listenerClick(e) {
+    const divModale = document.querySelector(".modale-container");
+        if (!divModale.contains(e.target)){
+            if (isOpen) {
+                closeModale();
+            }
+        }
+        }
 
 
 
