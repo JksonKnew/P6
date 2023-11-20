@@ -69,11 +69,7 @@
           <button id="btnFilter1" onclick="filterWorks(1)" class="filter-btn">
             Objets
           </button>
-          <button
-            id="btnFilter2"
-            onclick="filterWorks(2)"
-            class="filter-btn"
-          >
+          <button id="btnFilter2" onclick="filterWorks(2)" class="filter-btn">
             Appartements
           </button>
           <button id="btnFilter3" onclick="filterWorks(3)" class="filter-btn">
@@ -98,7 +94,7 @@
         </form>
       </section>
     </main>
-    <section id="modaleFullContainer" class="modale-full-container">
+    <div id="modaleFullContainer" class="modale-full-container">
       <div class="modale-container">
         <div class="nav-modale-btn">
           <i
@@ -112,11 +108,7 @@
           ></i>
         </div>
         <span class="modale-title">Galerie Photo</span>
-        <div
-          class="gallery-editor-container"
-          id="galleryEditContainer"
-          type="hidden"
-        ></div>
+        <div class="gallery-editor-container" id="galleryEditContainer"></div>
         <span class="btn-add-photo" onclick="modaleSecondPage()"
           >Ajouter une photo</span
         >
@@ -135,7 +127,7 @@
             for="category"
             >Catégorie</label
           ><select class="category-select" id="category">
-            <option></option>
+            <option label=" "></option>
             <option value="1">Objets</option>
             <option value="2">Appartements</option>
             <option value="3">Hôtels et Restaurants</option>
@@ -152,7 +144,7 @@
           <span class="delete-validation-btn">Supprimer</span>
         </div>
       </div>
-    </section>
+    </div>
     <footer>
       <nav>
         <ul>

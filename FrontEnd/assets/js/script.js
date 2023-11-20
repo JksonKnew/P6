@@ -222,9 +222,7 @@ function openModale() {
     modaleActive.style.display="flex";
     document.getElementById("returnModaleBtn").style.display="none";
     setTimeout(()=>{
-
         isOpen=true
-        console.log(isOpen);
     },50);
     window.addEventListener('click', listenerClick);
 }
@@ -243,7 +241,6 @@ function closeModale() {
     let modaleSection = document.querySelector(".modale-full-container");
     modaleSection.style.display="none";
     isOpen = false;
-    console.log(isOpen);
 }
 
 function modaleSecondPage() {
