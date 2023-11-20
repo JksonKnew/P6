@@ -36,7 +36,7 @@ function filterWorks(filterId) {
     if (filterId === 0) {
         generateWorks(worksItems);
         resetFilter();
-        document.getElementById(`btnFilter0`).classList.add("filter-btn-active");
+        document.getElementById(`btnFilter${filterId}`).classList.add("filter-btn-active");
         return
     }
     const filteredWorks = worksItems.filter(work => work.categoryId === filterId);
@@ -61,7 +61,8 @@ getWorks();
 // ********************************************  Loggin  ********************************************/
 function createElementsAdmin() {
 
-    //**********************Editor mode header************
+    //********************** Editor mode header ************
+
     let body = document.getElementById("bodyContainer");
     let editorBanner = document.createElement("div");
     editorBanner.classList.add("editor-div");
@@ -80,16 +81,12 @@ function createElementsAdmin() {
     let navContainer = document.getElementById("nav-list");
     let logoutBtn = document.createElement("li");
     let logoutTxt = document.createElement("a");
+    
     logoutTxt.innerHTML="Logout";
-    logoutBtn.addEventListener("click", function(){
-        window.localStorage.removeItem("token")
-        verifyLog();
-        location.reload();
-    })
+    logoutBtn.setAttribute("onclick", "logout()");
     
     navContainer.appendChild(logoutBtn);
     logoutBtn.appendChild(logoutTxt)
-
 
     //************************ filter & Modify button **********************
 
@@ -112,6 +109,13 @@ function createElementsAdmin() {
     document.querySelector(".filter-div").style.display = "none";
 
 }
+
+function logout() {
+    window.localStorage.removeItem("token")
+    verifyLog();
+    location.reload();
+}
+
     //************************ Gallery Admin **********************
 function createAdminGallery(works) {
 
