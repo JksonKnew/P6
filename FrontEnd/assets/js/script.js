@@ -153,10 +153,6 @@ function adminGallery(works) {
         image = document.createElement("img");
         image.src = work.imageUrl;
 
-
-
-
-
         container.appendChild(figure);
         figure.appendChild(div);
         div.appendChild(trash);
@@ -178,7 +174,6 @@ function deleteImg(i) {
 
     document.querySelector(".delete-validation-btn").addEventListener("click", function(){
         console.log(index);
-        window.location.reload();
         fetch(`http://localhost:5678/api/works/${i}`, {
             method: "DELETE", 
             headers: {Authorization: `Bearer ${window.localStorage.getItem("token")}`
@@ -188,22 +183,13 @@ function deleteImg(i) {
 
 function addImg(){
     const formData = new FormData();
-
     const imgFileInput = document.getElementById('imgFile');
-
-
     const titleInput = document.getElementById('title');
     const categorySelect = document.getElementById('category');
   
-
     formData.append('image', imgFileInput.files[0]);
     formData.append('title', titleInput.value);
     formData.append('category', categorySelect.value);
-
-    console.log(imgFileInput.files[0]);
-    console.log(titleInput.value);
-    console.log(categorySelect.value);
-    console.log(formData);
 
     fetch(`http://localhost:5678/api/works/`, {
         method: "POST", 
