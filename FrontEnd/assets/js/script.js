@@ -6,7 +6,7 @@ function getWorks() {
     .then(json => {
         worksItems = json;
         generateWorks(worksItems);
-        createAdminGallery(worksItems);
+        adminGallery(worksItems);
     })
     .catch(error => console.error(error))
 }
@@ -59,6 +59,24 @@ getWorks();
 
 
 // ********************************************  Loggin  ********************************************/
+
+//***************************************** Login Verifiction *****************************************
+
+let isConnect = false
+function verifyLog() {
+    if (window.localStorage.getItem("token") != null){
+        createElementsAdmin();
+        isConnect = true
+    } else {
+        let modaleSection = document.getElementById("modaleFullContainer")
+        modaleSection.remove();
+        isConnect = false
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    verifyLog();
+});
 function createElementsAdmin() {
 
     //********************** Editor mode header ************
@@ -117,7 +135,7 @@ function logout() {
 }
 
     //************************ Gallery Admin **********************
-function createAdminGallery(works) {
+function adminGallery(works) {
 
     container = document.getElementById("galleryEditContainer");
 
@@ -129,7 +147,7 @@ function createAdminGallery(works) {
         figure = document.createElement("figure");
         div = document.createElement("div");
         div.classList.add("trash-container");
-        div.setAttribute("onclick", `deleteFig(${work.id})`)
+        div.setAttribute("onclick", `deleteImg(${work.id})`)
         trash = document.createElement("i");
         trash.classList.add("fa-solid", "fa-trash-can", "fa-sm");
         image = document.createElement("img");
@@ -148,7 +166,7 @@ function createAdminGallery(works) {
 
 }
 
-function deleteFig(i) {
+function deleteImg(i) {
     let index = i;
     let modale = document.querySelector(".delete-validation-container");
     modale.style.display = "flex";
@@ -168,7 +186,7 @@ function deleteFig(i) {
     })
 }
 
-function addFig(){
+function addImg(){
     const formData = new FormData();
 
     const imgFileInput = document.getElementById('imgFile');
@@ -195,26 +213,8 @@ function addFig(){
 }
 
 
-//***************************************** Login *****************************************
-let isConnect = false
-function verifyLog() {
-    if (window.localStorage.getItem("token") != null){
-        createElementsAdmin();
-        isConnect = true
-    } else {
-        let modaleSection = document.getElementById("modaleFullContainer")
-        modaleSection.remove();
-        isConnect = false
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    verifyLog();
-});
-
-
-
 //***************************************** Modale ***************************************
+
 let isOpen = false;
 
 function openModale() {
@@ -226,12 +226,16 @@ function openModale() {
         isOpen=true
         console.log(isOpen);
     },50);
-
-
-
     window.addEventListener('click', listenerClick);
+}
 
-
+function listenerClick(e) {
+    const divModale = document.querySelector(".modale-container");
+    if (!divModale.contains(e.target)){
+        if (isOpen) {
+            closeModale();
+        }
+    }
 }
 
 function closeModale() {
@@ -241,19 +245,6 @@ function closeModale() {
     isOpen = false;
     console.log(isOpen);
 }
-
-
-function listenerClick(e) {
-    const divModale = document.querySelector(".modale-container");
-        if (!divModale.contains(e.target)){
-            if (isOpen) {
-                closeModale();
-            }
-        }
-        }
-
-
-
 
 function modaleSecondPage() {
     document.querySelector(".btn-add-photo").style.display="none";
@@ -282,11 +273,8 @@ function modaleSecondPage() {
 
 
             console.log("Fichier chargé : " + selectedFile.name);
-        }
-        
+        }  
     })
-
-
 }
 
 function returnModale() {
@@ -297,16 +285,7 @@ function returnModale() {
     document.querySelector(".nav-modale-btn").style="justify-content: flex-end";
     document.getElementById("returnModaleBtn").style.display="none";
     document.querySelector(".modale-title").innerHTML="Galerie Photo";
-
 }
-
-
-
-
-
-// Setup click outside modale
-// renaming
-
 
 
 
