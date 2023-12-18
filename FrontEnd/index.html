@@ -61,18 +61,17 @@
         <div class="filter-div">
           <button
             id="btnFilter0"
-            onclick="filterWorks(0)"
             class="filter-btn filter-btn-active"
           >
             Tous
           </button>
-          <button id="btnFilter1" onclick="filterWorks(1)" class="filter-btn">
+          <button id="btnFilter1" class="filter-btn">
             Objets
           </button>
-          <button id="btnFilter2" onclick="filterWorks(2)" class="filter-btn">
+          <button id="btnFilter2" class="filter-btn">
             Appartements
           </button>
-          <button id="btnFilter3" onclick="filterWorks(3)" class="filter-btn">
+          <button id="btnFilter3" class="filter-btn">
             Hôtels et Restaurants
           </button>
         </div>
@@ -99,17 +98,16 @@
         <div class="nav-modale-btn">
           <i
             class="fa-solid fa-arrow-left fa-xl return-modale-btn"
-            onclick="returnModale()"
-            id="returnModaleBtn"
+            id="return-modale-btn"
           ></i>
           <i
             class="fa-solid fa-xmark fa-xl close-modale-btn"
-            onclick="closeModale()"
+            id="close-modale-btn"
           ></i>
         </div>
         <span class="modale-title">Galerie Photo</span>
         <div class="gallery-editor-container" id="galleryEditContainer"></div>
-        <span class="btn-add-photo" onclick="modaleSecondPage()"
+        <span class="btn-add-photo" id="btn-add-photo"
           >Ajouter une photo</span
         >
         <form class="submit-image-form">
@@ -133,7 +131,7 @@
             <option value="3">Hôtels et Restaurants</option>
           </select>
         </form>
-        <span onclick="addImg()" class="btn-validation">Valider</span>
+        <span class="btn-validation" id="btn-validation">Valider</span>
       </div>
       <div class="delete-validation-container">
         <span class="delete-validation-title"

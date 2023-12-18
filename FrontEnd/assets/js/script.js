@@ -147,7 +147,8 @@ function adminGallery(works) {
         figure = document.createElement("figure");
         div = document.createElement("div");
         div.classList.add("trash-container");
-        div.setAttribute("onclick", `deleteImg(${work.id})`)
+        // div.setAttribute("onclick", `deleteImg(${work.id})`)
+        div.addEventListener('click', () => deleteImg(work.id))
         trash = document.createElement("i");
         trash.classList.add("fa-solid", "fa-trash-can", "fa-sm");
         image = document.createElement("img");
@@ -206,7 +207,7 @@ let isOpen = false;
 function openModale() {
     let modaleActive = document.querySelector(".modale-full-container");
     modaleActive.style.display="flex";
-    document.getElementById("returnModaleBtn").style.display="none";
+    document.getElementById("return-modale-btn").style.display="none";
     setTimeout(()=>{
         isOpen=true
     },50);
@@ -234,30 +235,30 @@ function modaleSecondPage() {
     document.getElementById("galleryEditContainer").style.display="none";
     document.querySelector(".submit-image-form").style.display="flex";
     document.querySelector(".btn-validation").style.display="flex";
-    let leftBtn = document.getElementById("returnModaleBtn");
+    let leftBtn = document.getElementById("return-modale-btn");
     leftBtn.style.display="flex";
     let navigationDiv = document.querySelector(".nav-modale-btn");
     navigationDiv.style="justify-content: space-between";
     document.querySelector(".modale-title").innerHTML="Ajout Photo";
 
-    let imgFile = document.getElementById("imgFile");
-    imgFile.addEventListener("change", function(){
-        const selectedFile = event.target.files[0];
-        if (selectedFile) {
-            let imgFile = document.createElement("img");
-            imgFile.src = URL.createObjectURL(selectedFile);
-            imgFile.style.height = "100%";
-            imgFile.style.objectFit = "cover";
+    document.getElementById("imgFile").addEventListener("change", handleImgFileChange);
+}
 
-            let imgFileContainer = document.querySelector(".label-file");
-            imgFileContainer.appendChild(imgFile);
-            document.querySelector(".add-img-from-btn").style.display = "none";
-            document.querySelector(".far").style.display = "none";
+function handleImgFileChange(event) {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+        let imgFile = document.createElement("img");
+        imgFile.src = URL.createObjectURL(selectedFile);
+        imgFile.style.height = "100%";
+        imgFile.style.objectFit = "cover";
 
+        let imgFileContainer = document.querySelector(".label-file");
+        imgFileContainer.appendChild(imgFile);
+        document.querySelector(".add-img-from-btn").style.display = "none";
+        document.querySelector(".far").style.display = "none";
 
-            console.log("Fichier chargé : " + selectedFile.name);
-        }  
-    })
+        console.log("Fichier chargé : " + selectedFile.name);
+    }
 }
 
 function returnModale() {
@@ -266,9 +267,60 @@ function returnModale() {
     document.querySelector(".submit-image-form").style.display="none";
     document.querySelector(".btn-validation").style.display="none";
     document.querySelector(".nav-modale-btn").style="justify-content: flex-end";
-    document.getElementById("returnModaleBtn").style.display="none";
+    document.getElementById("return-modale-btn").style.display="none";
     document.querySelector(".modale-title").innerHTML="Galerie Photo";
+    document.getElementById("imgFile").removeEventListener("change", handleImgFileChange);
 }
 
+//***************************** Listener Modale **************************************************
+
+    // Listener nav button
+document.addEventListener("DOMContentLoaded", function() {
+    if (isConnect) {
+        document.getElementById("return-modale-btn").addEventListener("click", function(){
+            returnModale();
+        });
+    
+        document.getElementById("close-modale-btn").addEventListener("click", function(){
+            closeModale();
+        });
+    }
+});
 
 
+// listener add Img btn
+document.addEventListener("DOMContentLoaded", function() {
+    if (isConnect) {
+        document.getElementById("btn-add-photo").addEventListener("click", function(){
+            modaleSecondPage();
+        });
+    
+        document.getElementById("btn-validation").addEventListener("click", function(){
+            addImg();
+        });
+    }
+});
+
+
+
+//************************* Listener Filter button *******************************************
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    document.getElementById("btnFilter0").addEventListener("click", function() {
+        filterWorks(0);
+    });
+    
+    document.getElementById("btnFilter1").addEventListener("click", function() {
+        filterWorks(1);
+    });
+    
+    document.getElementById("btnFilter2").addEventListener("click", function() {
+        filterWorks(2);
+    });
+    
+    document.getElementById("btnFilter3").addEventListener("click", function() {
+        filterWorks(3);
+    });
+    
+});
