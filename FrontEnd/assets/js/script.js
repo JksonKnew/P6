@@ -200,18 +200,19 @@ function addImg(){
     formData.append('title', titleInput.value);
     formData.append('category', categorySelect.value);
 
-    fetch(`http://localhost:5678/api/works/`, {
-        method: "POST", 
-        headers: {Authorization: `Bearer ${window.sessionStorage.getItem("token")}`},
-        body: formData,
-    })
-    .then(response => {
-        if (response.status === 201) {
-            console.log("ajouté")
-            closeModale();
-            getWorks();
-        }
-    })
+    // fetch(`http://localhost:5678/api/works/`, {
+    //     method: "POST", 
+    //     headers: {Authorization: `Bearer ${window.sessionStorage.getItem("token")}`},
+    //     body: formData,
+    // })
+    // .then(response => {
+    //     if (response.status === 201) {
+    //         console.log("ajouté")
+    //         closeModale();
+    //         getWorks();
+    //     }
+    // })
+    verifyFileForm();
 }
 
 
@@ -258,6 +259,7 @@ function modaleSecondPage() {
     document.querySelector(".modale-title").innerHTML="Ajout Photo";
 
     document.getElementById("imgFile").addEventListener("change", handleImgFileChange);
+    verifyFileForm();
 }
 
 function handleImgFileChange(event) {
@@ -305,6 +307,21 @@ function resetFormValue() {
     }
 
 }
+
+function verifyFileForm() {
+    var imgFileInput = document.getElementById("imgFile");
+    var titleInput = document.getElementById("title");
+    var categorySelect = document.getElementById("category");
+
+    if (imgFileInput.files.length > 0 && titleInput.value.trim() !== '' && categorySelect.value.trim() !== '') {
+        console.log("ok");
+        document.getElementById("btn-validation").style.backgroundColor = "#1d6154";
+    } else {
+        console.log("pas ok");
+        document.getElementById("btn-validation").style.display = "flex";
+        document.getElementById("btn-validation").style.backgroundColor = "rgba(185, 197, 204, 1)";
+    }
+}
 //***************************** Listener Modale **************************************************
 
     // Listener nav button
@@ -334,7 +351,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("title").addEventListener("change", function(){
+        verifyFileForm();
+    })
+    document.getElementById("imgFile").addEventListener("change", function(){
+        verifyFileForm();
+    })
+    document.getElementById("category").addEventListener("change", function(){
+        verifyFileForm();
+    })
+});
 
 //************************* Listener Filter button *******************************************
 
