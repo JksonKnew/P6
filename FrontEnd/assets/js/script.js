@@ -138,6 +138,7 @@ function logout() {
 function adminGallery(works) {
 
     container = document.getElementById("galleryEditContainer");
+    container.innerHTML = '';
 
     if (isConnect === true) {    
         
@@ -175,11 +176,17 @@ function deleteImg(i) {
 
     document.querySelector(".delete-validation-btn").addEventListener("click", function(){
         console.log(index);
+        modale.style.display = "none";
         fetch(`http://localhost:5678/api/works/${i}`, {
             method: "DELETE", 
             headers: {Authorization: `Bearer ${window.sessionStorage.getItem("token")}`
-        }});
-        generateWorks(worksItems);
+        }})
+        .then (response => {
+            if (response.status === 204) {
+                console.log("supprimé");
+                getWorks();
+            }
+        })
     })
 }
 
@@ -197,8 +204,14 @@ function addImg(){
         method: "POST", 
         headers: {Authorization: `Bearer ${window.sessionStorage.getItem("token")}`},
         body: formData,
-    });
-    generateWorks(worksItems);
+    })
+    .then(response => {
+        if (response.status === 201) {
+            console.log("ajouté")
+            closeModale();
+            getWorks();
+        }
+    })
 }
 
 
@@ -227,6 +240,7 @@ function listenerClick(e) {
 
 function closeModale() {
     returnModale();
+    resetFormValue();
     let modaleSection = document.querySelector(".modale-full-container");
     modaleSection.style.display="none";
     isOpen = false;
@@ -253,6 +267,7 @@ function handleImgFileChange(event) {
         imgFile.src = URL.createObjectURL(selectedFile);
         imgFile.style.height = "100%";
         imgFile.style.objectFit = "cover";
+        imgFile.setAttribute("id", 'imgFormFile')
 
         let imgFileContainer = document.querySelector(".label-file");
         imgFileContainer.appendChild(imgFile);
@@ -274,6 +289,22 @@ function returnModale() {
     document.getElementById("imgFile").removeEventListener("change", handleImgFileChange);
 }
 
+function resetFormValue() {
+    const imgFileInput = document.getElementById('imgFile');
+    const titleInput = document.getElementById('title');
+    const categorySelect = document.getElementById('category');
+
+    imgFileInput.value = '';
+    titleInput.value = '';
+    categorySelect.value = '';
+    document.querySelector(".add-img-from-btn").style.display = "flex";
+    document.querySelector(".far").style.display = "flex";
+    let imgFormFile = document.getElementById("imgFormFile");
+    if (imgFormFile) {
+        imgFormFile.remove();
+    }
+
+}
 //***************************** Listener Modale **************************************************
 
     // Listener nav button
