@@ -2,9 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.querySelector(".login-container form");
     const btnConnect = document.getElementById("btn-connection");
 
-
-
-
     loginForm.addEventListener("submit", async function(event) {
         event.preventDefault();
         const email = document.getElementById("email").value;
@@ -25,14 +22,14 @@ document.addEventListener("DOMContentLoaded", function() {
         
             const result = await response.json();
             const token = result.token;
-            window.localStorage.setItem("token", token);
+            window.sessionStorage.setItem("token", token);
 
             if (token == null){
               console.log("faux");
               const passwordInput = document.getElementById("motdepasse");
               const emailInput = document.getElementById("email");
 
-              btnConnect.setAttribute("value", "Mot de passe erroné");
+              btnConnect.setAttribute("value", "Identifiant erroné");
               btnConnect.style.width= "auto";
               btnConnect.style.padding= "0px 20px";
               btnConnect.style.backgroundColor="firebrick";

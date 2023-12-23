@@ -64,7 +64,7 @@ getWorks();
 
 let isConnect = false
 function verifyLog() {
-    if (window.localStorage.getItem("token") != null){
+    if (window.sessionStorage.getItem("token") != null){
         createElementsAdmin();
         isConnect = true
     } else {
@@ -129,7 +129,7 @@ function createElementsAdmin() {
 }
 
 function logout() {
-    window.localStorage.removeItem("token")
+    window.sessionStorage.removeItem("token")
     verifyLog();
     location.reload();
 }
@@ -177,8 +177,9 @@ function deleteImg(i) {
         console.log(index);
         fetch(`http://localhost:5678/api/works/${i}`, {
             method: "DELETE", 
-            headers: {Authorization: `Bearer ${window.localStorage.getItem("token")}`
+            headers: {Authorization: `Bearer ${window.sessionStorage.getItem("token")}`
         }});
+        generateWorks(worksItems);
     })
 }
 
@@ -194,9 +195,10 @@ function addImg(){
 
     fetch(`http://localhost:5678/api/works/`, {
         method: "POST", 
-        headers: {Authorization: `Bearer ${window.localStorage.getItem("token")}`},
+        headers: {Authorization: `Bearer ${window.sessionStorage.getItem("token")}`},
         body: formData,
     });
+    generateWorks(worksItems);
 }
 
 
